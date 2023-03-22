@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Задача 3</h1>
+	<p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</p>
+	<script>
+			// описуємо функцію для рандомних чисел
+			function getRandomNumbers(minNum, maxNum) {
+				return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+			}
+
+			// формування рандомного одновимірного масиву
+			function getRandomArray(arrayLength, minNum, maxNum) {
+				let array = []
+				for (let i = 0; i < arrayLength; i++) {
+					const randomNum = getRandomNumbers(minNum, maxNum)
+					array.push(randomNum)
+				}
+				return array
+			}
+
+			//  виводимо дані
+			let randomArray = getRandomArray(30, 1, 50)
+			console.log(randomArray)
+
+			// підраховуєм скільки було обмінів під час сортування включеннями.
+			function insertSort(randomArray) {
+				let counter = 0
+				for (let k = 1; k < randomArray.length; k++) {
+					const currentElement = randomArray[k]
+					let i = k - 1
+					while (i >= 0 && randomArray[i] > currentElement) {
+						randomArray[i + 1] = randomArray[i]
+						i--
+						counter++
+					}
+					randomArray[i + 1] = currentElement
+
+				}
+				return counter
+			}
+			let result = insertSort(randomArray)
+			document.write(`кількість обмінів${result}`)
+			console.log(result)
+
+	</script>
+</body>
+</html>
